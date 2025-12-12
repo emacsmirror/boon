@@ -250,7 +250,7 @@ then ask for the string interactively instead."
                                result))))
         result))))
 
-(defun boon-select-word-occurences (what-fun where)
+(defun boon-select-symbol-occurences (what-fun where)
   "Return the occurences of WHAT-FUN as sub-regions of WHERE."
   (interactive (list (boon-spec-string-lazy "occurences of what?") (boon-spec-selector "where?")))
   (lambda ()
@@ -261,9 +261,9 @@ then ask for the string interactively instead."
           (goto-char (boon-reg-begin reg))
           (while (search-forward-regexp
                   (rx-to-string
-                   `(seq word-start
+                   `(seq symbol-start
                          (literal ,what)
-                         word-end)
+                         symbol-end)
                    t)
                   (boon-reg-end reg) t)
             (setq result (cons (boon-mk-reg (match-beginning 0)
